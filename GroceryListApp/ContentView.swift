@@ -7,18 +7,77 @@
 
 import SwiftUI
 
+enum FilterMode : String {
+    case All = "All"
+    case Done = "Done"
+    case NotDone = "Not Done"
+}
+
 struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+    @EnvironmentObject var groceryViewModel : GroceryViewModel
+    @State var mode : FilterMode = .All
+    var visibleItems : [GroceryItem] {
+        switch mode {
+        case .All:
+            return groceryViewModel.items
+        case .Done:
+            return groceryViewModel.items.filter({ $0.done })
+        case .NotDone:
+            return groceryViewModel.items.filter({!$0.done})
         }
-        .padding()
+    }
+    var body: some View {
+        NavigationStack {
+            List {
+                ForEach(visibleItems) {item in
+                    HStack {
+                        
+                        Button {
+                            groceryViewModel.toggleDone(for: item.id)
+                        } label: {
+                            Image(systemName: item.done ? "checkmark.square" : "square")
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        
+                        Text(item.text)
+                    }
+                }
+                .onDelete(perform: delete)
+            }
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button(mode.rawValue) {
+                        switch mode {
+                        case .All:
+                            mode = .NotDone
+                        case .Done:
+                            mode = .All
+                        case .NotDone:
+                            mode = .Done
+                        }
+                    }
+                }
+                ToolbarItem(placement: .principal) {
+                    Text("Grocery List")
+                        .font(.largeTitle)
+                        .bold()
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    NavigationLink(destination: AddGroceryItemScreen()) {
+                        Image(systemName: "square.and.pencil")
+                    }
+                }
+            }
+        }
+    }
+    
+    func delete(at offsets: IndexSet) {
+        let item = visibleItems[offsets.first ?? 0]
+        groceryViewModel.delete(for: item.id)
     }
 }
 
 #Preview {
     ContentView()
+        .environmentObject(GroceryViewModel())
 }
