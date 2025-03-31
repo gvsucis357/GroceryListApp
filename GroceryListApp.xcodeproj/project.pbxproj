@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		9E8548932D972473008773D4 /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = 9E8548922D972473008773D4 /* AlertToast */; };
+		9EDC34242D9B3837008E97EF /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 9EDC34232D9B3837008E97EF /* FirebaseCore */; };
+		9EDC34262D9B3837008E97EF /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 9EDC34252D9B3837008E97EF /* FirebaseFirestore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,7 +58,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EDC34242D9B3837008E97EF /* FirebaseCore in Frameworks */,
 				9E8548932D972473008773D4 /* AlertToast in Frameworks */,
+				9EDC34262D9B3837008E97EF /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,6 +122,8 @@
 			name = GroceryListApp;
 			packageProductDependencies = (
 				9E8548922D972473008773D4 /* AlertToast */,
+				9EDC34232D9B3837008E97EF /* FirebaseCore */,
+				9EDC34252D9B3837008E97EF /* FirebaseFirestore */,
 			);
 			productName = GroceryListApp;
 			productReference = 9E8548642D972402008773D4 /* GroceryListApp.app */;
@@ -203,6 +209,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				9E8548912D972473008773D4 /* XCRemoteSwiftPackageReference "AlertToast" */,
+				9EDC34222D9B3837008E97EF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 9E8548652D972402008773D4 /* Products */;
@@ -571,6 +578,14 @@
 				minimumVersion = 1.3.9;
 			};
 		};
+		9EDC34222D9B3837008E97EF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.11.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -578,6 +593,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9E8548912D972473008773D4 /* XCRemoteSwiftPackageReference "AlertToast" */;
 			productName = AlertToast;
+		};
+		9EDC34232D9B3837008E97EF /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9EDC34222D9B3837008E97EF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		9EDC34252D9B3837008E97EF /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9EDC34222D9B3837008E97EF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
