@@ -36,7 +36,7 @@ struct ContentView: View {
                             Task {
                                 await updateItem(item: GroceryItem(id: item.id, done: !item.done, text: item.text))
                             }
-                            groceryViewModel.toggleDone(for: item.id)
+                            //groceryViewModel.toggleDone(for: item.id)
                         } label: {
                             Image(systemName: item.done ? "checkmark.square" : "square")
                         }
@@ -46,6 +46,14 @@ struct ContentView: View {
                     }
                 }
                 .onDelete(perform: delete)
+            }
+            .onAppear() {
+                print("listening for firebase updates...")
+                listenForItemUpdates(vm: groceryViewModel)
+            }
+            .onDisappear() {
+                print("no longer listening for firebase updates...")
+                stopListeningForItemUpdates()
             }
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
@@ -76,7 +84,11 @@ struct ContentView: View {
     
     func delete(at offsets: IndexSet) {
         let item = visibleItems[offsets.first ?? 0]
-        groceryViewModel.delete(for: item.id)
+        //groceryViewModel.delete(for: item.id)
+        Task {
+            await deleteItem(item: item)
+        }
+
     }
 }
 

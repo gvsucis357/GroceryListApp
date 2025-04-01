@@ -13,6 +13,7 @@ struct GroceryItem: Identifiable {
     var text: String
 }
 
+@MainActor
 class GroceryViewModel : ObservableObject {
     @Published var items: [GroceryItem] = []
     
