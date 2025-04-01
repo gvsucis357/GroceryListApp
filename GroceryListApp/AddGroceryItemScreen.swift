@@ -24,7 +24,12 @@ struct AddGroceryItemScreen: View {
                 TextField("Enter grocery item", text: $text)
                 Button("Save") {
                     if text != "" {
-                        groceryViewModel.items.append(GroceryItem(text: text))
+                        //groceryViewModel.items.append(GroceryItem(text: text))
+                        let item = GroceryItem(text: text)
+                        groceryViewModel.items.append(item)
+                        Task {
+                            await addItem(item: item)
+                        }
                         text = ""
                         showToast.toggle()
                     }

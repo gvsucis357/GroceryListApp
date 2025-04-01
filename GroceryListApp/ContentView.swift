@@ -33,6 +33,9 @@ struct ContentView: View {
                     HStack {
                         
                         Button {
+                            Task {
+                                await updateItem(item: GroceryItem(id: item.id, done: !item.done, text: item.text))
+                            }
                             groceryViewModel.toggleDone(for: item.id)
                         } label: {
                             Image(systemName: item.done ? "checkmark.square" : "square")
